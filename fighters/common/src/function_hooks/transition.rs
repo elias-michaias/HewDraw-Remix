@@ -156,6 +156,13 @@ unsafe fn is_enable_transition_term_hook(boma: &mut BattleObjectModuleAccessor, 
             }
         }
 
+        //Disable trampoline if already been used
+        if fighter_kind == *FIGHTER_KIND_PACMAN {
+            if flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_SPECIAL_HI && VarModule::is_flag(boma.object(), vars::pacman::instance::IS_USE_TRAMP) {
+                    return false;
+            }
+        }
+
         //Disable Duck Hunt Down Special on a timer
         if boma.kind() == *FIGHTER_KIND_DUCKHUNT  {
             if VarModule::get_int(boma.object(), vars::duckhunt::instance::GUNMAN_TIMER) != 0 

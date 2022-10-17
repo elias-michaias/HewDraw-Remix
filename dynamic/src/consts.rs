@@ -717,6 +717,15 @@ pub mod vars {
         }
     }
 
+    pub mod pacman {
+        pub mod instance {
+            // flags
+            pub const DAIR_BOUNCE:                          i32 = 0x0100;
+            pub const IS_USE_TRAMP:                         i32 = 0x1000;
+            pub const IS_USE_DJ:                            i32 = 0x1100;
+        }
+    }
+
     pub mod palutena {
         pub mod status {
             // flags

@@ -58,8 +58,8 @@ pub fn install() {
     install_acmd_scripts!(
         escape_air_game,
         escape_air_slide_game,
-      dash_sound,
-		pacman_turn_dash_game
+        dash_sound,
+		pacman_turn_dash_game,
     );
 }
 
