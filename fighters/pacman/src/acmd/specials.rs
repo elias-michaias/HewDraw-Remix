@@ -150,18 +150,6 @@ unsafe fn pacman_special_air_lw_failure_game(fighter: &mut L2CAgentBase) {
     
 }
 
-#[acmd_script( agent = "pacman", scripts = ["game_specialsstart" , "game_specialsloop"] , category = ACMD_GAME , low_priority)]
-unsafe fn pacman_special_s_start_game(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-    let boma = fighter.boma();
-    KineticModule::unable_energy(boma, *FIGHTER_KINETIC_ENERGY_ID_MOTION);
-    KineticModule::unable_energy_all(boma);
-    FT_MOTION_RATE(fighter, 0.5);
-    if is_excute(fighter) {
-        FOOT_EFFECT(fighter, Hash40::new("sys_run_smoke"), Hash40::new("top"), -4, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
-    }
-}
-
 
 #[acmd_script( agent = "pacman_firehydrant", script = "game_fly" , category = ACMD_GAME , low_priority)]
 unsafe fn pacman_firehydrant_fly_game(fighter: &mut L2CAgentBase) {
