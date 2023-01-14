@@ -204,7 +204,6 @@ pub fn install() {
         //pacman_special_air_n_shoot_game,
         pacman_special_lw_failure_game,
         pacman_special_air_lw_failure_game,
-        pacman_special_s_start_game,
         pacman_special_air_hi_loop,
 
         //hydrant
