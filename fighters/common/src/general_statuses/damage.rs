@@ -433,10 +433,11 @@ pub unsafe fn exec_damage_elec_hit_stop_hook(fighter: &mut L2CFighterCommon) {
     if hit_stop_frame > 0 {
         WorkModule::dec_int(fighter.module_accessor, *FIGHTER_STATUS_DAMAGE_WORK_INT_HIT_STOP_FRAME);
     }
-    let damage_stop_frame = FighterStopModuleImpl::get_damage_stop_frame(fighter.module_accessor);
-    if damage_stop_frame == 1.0 {
-        fighter.FighterStatusDamage__req_fly_roll_smoke_first();
-    }
+    // Unused
+    // let damage_stop_frame = FighterStopModuleImpl::get_damage_stop_frame(fighter.module_accessor);
+    // if damage_stop_frame == 1.0 {
+    //     fighter.FighterStatusDamage__req_fly_roll_smoke_first();
+    // }
     fighter.sub_FighterStatusDamage_correctDamageVectorExecStop();
     if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_KOZUKATA_DAMAGE) {
         let clatter_time = ControlModule::get_clatter_time(fighter.module_accessor, 0);
@@ -455,7 +456,9 @@ pub unsafe fn exec_damage_elec_hit_stop_hook(fighter: &mut L2CFighterCommon) {
             if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_PARALYZE_STOP) {
                 return;
             }
-            // fighter.FighterStatusUniqProcessDamage_check_hit_stop_delay_flick(hashmap);
+        }
+        else {
+            fighter.FighterStatusUniqProcessDamage_check_hit_stop_delay_flick(hashmap);
         }
     }
     else {

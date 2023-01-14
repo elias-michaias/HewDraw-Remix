@@ -25,7 +25,7 @@ unsafe fn game_attack11(fighter: &mut L2CAgentBase) {
     }
     frame(lua_state, 13.0);
     if is_excute(fighter) {
-        WorkModule::on_flag(boma, *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_RESTART);
+        //WorkModule::on_flag(boma, *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_RESTART);
     }
     
 }
@@ -53,6 +53,20 @@ unsafe fn game_attack12(fighter: &mut L2CAgentBase) {
         AttackModule::clear_all(boma);
     }
     
+}
+
+#[acmd_script( agent = "samusd", script = "effect_attack12" , category = ACMD_EFFECT , low_priority)]
+unsafe fn effect_attack12(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    let boma = fighter.boma();
+    if is_excute(fighter) {
+        FOOT_EFFECT(fighter, Hash40::new("null"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+    }
+    frame(lua_state, 6.0);
+    if is_excute(fighter) {
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_attack_arc_b"), Hash40::new("top"), -2, 12, 3, -17, -22, -81, 1.25, true);
+        LAST_EFFECT_SET_COLOR(fighter, 0.1, 0.7, 3.0);
+    }
 }
 
 #[acmd_script( agent = "samusd", script = "game_attackdash" , category = ACMD_GAME, low_priority)]
@@ -101,6 +115,7 @@ pub fn install() {
     install_acmd_scripts!(
         game_attack11,
         game_attack12,
+        effect_attack12,
         game_attackdash,
         effect_attackdash,
     );
