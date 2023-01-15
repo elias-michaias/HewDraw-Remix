@@ -15,11 +15,11 @@ unsafe fn nspecial_cancels(boma: &mut BattleObjectModuleAccessor, status_kind: i
     }
 }
 
-//Pac-Man Bonus Fruit Toss Land Cancel
-unsafe fn fruit_land_cancel(boma: &mut BattleObjectModuleAccessor, status_kind: i32, situation_kind: i32, cat2: i32, stick_y: f32) {
+//Pac-Man Bonus Fruit Toss Airdodge Cancel
+unsafe fn fruit_ac(boma: &mut BattleObjectModuleAccessor, status_kind: i32, frame: f32) {
     if status_kind == *FIGHTER_PACMAN_STATUS_KIND_SPECIAL_N_SHOOT {
-        if situation_kind == *SITUATION_KIND_GROUND && StatusModule::prev_situation_kind(boma) == *SITUATION_KIND_AIR {
-            StatusModule::change_status_request(boma, *FIGHTER_STATUS_KIND_LANDING, true);
+        if frame > 8.0 {
+            boma.check_airdodge_cancel();
         }
     }
 }
@@ -98,8 +98,8 @@ unsafe fn tramp_jump(fighter: &mut smash::lua2cpp::L2CFighterCommon) {
 
 pub unsafe fn moveset(fighter: &mut smash::lua2cpp::L2CFighterCommon, boma: &mut BattleObjectModuleAccessor, id: usize, cat: [i32 ; 4], status_kind: i32, situation_kind: i32, motion_kind: u64, stick_x: f32, stick_y: f32, facing: f32, frame: f32) {
     nspecial_cancels(boma, status_kind, situation_kind);
-    fruit_land_cancel(boma, status_kind, situation_kind, cat[0], stick_y);
-    pacrun(boma, status_kind, situation_kind, cat[0], stick_y);
+    fruit_ac(boma, status_kind, frame);
+    //pacrun(boma, status_kind, situation_kind, cat[0], stick_y);
     dair_bounce(fighter);
     tramp_jump(fighter);
 }
