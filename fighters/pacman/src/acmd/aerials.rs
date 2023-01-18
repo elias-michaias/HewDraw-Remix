@@ -157,7 +157,21 @@ unsafe fn pacman_attack_air_lw_game(fighter: &mut L2CAgentBase) {
     if is_excute(fighter) {
         WorkModule::off_flag(boma, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_GRAVITY_STABLE_UNABLE);
     }
-    
+}
+
+#[acmd_script( agent = "pacman", script = "effect_attackairlw" , category = ACMD_EFFECT , low_priority)]
+unsafe fn pacman_attack_air_lw_effect(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    let boma = fighter.boma();
+    if is_excute(fighter) {
+        EFFECT_FOLLOW(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), 0, -4, 3, 0, 0, 0, 0.85, true);
+        LAST_EFFECT_SET_RATE(fighter, 1.5);
+    }
+    frame(lua_state, 5.0);
+    if is_excute(fighter) {
+        EFFECT_FOLLOW_FLIP_ALPHA(fighter, Hash40::new("sys_attack_line"), Hash40::new("sys_attack_line"), Hash40::new("top"), 0, 11, -5, 60, 0, 0, 0.9, true, *EF_FLIP_YZ, 0.5);
+        LAST_EFFECT_SET_RATE(fighter, 0.16);
+    }
 }
 
 pub fn install() {
@@ -166,6 +180,7 @@ pub fn install() {
         pacman_attack_air_b_game,
         pacman_attack_air_hi_game,
         pacman_attack_air_lw_game,
+        pacman_attack_air_lw_effect,
     );
 }
 
