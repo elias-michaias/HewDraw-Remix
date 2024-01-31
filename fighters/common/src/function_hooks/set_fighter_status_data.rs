@@ -20,6 +20,8 @@ unsafe fn set_fighter_status_data_hook(boma: &mut BattleObjectModuleAccessor, ar
             && boma.is_status_one_of(&[*FIGHTER_STATUS_KIND_SPECIAL_LW]))
         || (boma.kind() == *FIGHTER_KIND_DONKEY
             && boma.is_status_one_of(&[*FIGHTER_STATUS_KIND_SPECIAL_N]))
+        || (boma.kind() == *FIGHTER_KIND_GEKKOUGA
+            && boma.is_status_one_of(&[*FIGHTER_STATUS_KIND_SPECIAL_LW]))
         || (boma.kind() == *FIGHTER_KIND_IKE
             && boma.is_status_one_of(&[*FIGHTER_STATUS_KIND_SPECIAL_S]))
         || (boma.kind() == *FIGHTER_KIND_KIRBY
